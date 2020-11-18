@@ -9,4 +9,5 @@ A project based on neo4j graph database
 3. run `sh dock_neo4j_cluster.sh` in command line
 
 ## Data Source
-Simplified data from original data is stored in shared google folder.
+Uncomment lines in prune_data.py, and change the filepath of orginial data to your own filepath in the code.        
+This file will produce pruned data for our project.
