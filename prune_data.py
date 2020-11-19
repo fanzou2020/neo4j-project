@@ -59,7 +59,6 @@ def process_review(newFile, line):
 #
 # with open(filename_business, 'r') as f:
 #     line = f.readline()
-#     process_business(newFile, line)
 #     while line:
 #         process_business(newFile, line)
 #         line = f.readline()
@@ -71,7 +70,6 @@ def process_review(newFile, line):
 #
 # with open(filename_user, 'r') as f:
 #     line = f.readline()
-#     process_user(newUserFile, line)
 #     while line:
 #         process_user(newUserFile, line)
 #         line = f.readline()
@@ -83,7 +81,6 @@ def process_review(newFile, line):
 #
 # with open(filename_review, 'r') as f:
 #     line = f.readline()
-#     process_review(newReviewFile, line)
 #     while line:
 #         process_review(newReviewFile, line)
 #         line = f.readline()
