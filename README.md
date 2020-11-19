@@ -7,3 +7,7 @@ A project based on neo4j graph database
 ~/neo4j/core2/data; ~/neo4j/core2/conf; ~/neo4j/core2/logs;    
 ~/neo4j/core3/data; ~/neo4j/core3/conf; ~/neo4j/core3/logs;   
 3. run `sh dock_neo4j_cluster.sh` in command line
+
+## Data Source
+Uncomment lines in prune_data.py, and change the filepath of orginial data to your own filepath in the code.        
+This file will produce pruned data for our project.
