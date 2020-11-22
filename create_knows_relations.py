@@ -25,6 +25,7 @@ class Neo4jDriver:
                )
 
 
+# TODO: avoid duplicate knows relationship
 if __name__ == "__main__":
     driver = Neo4jDriver("neo4j://localhost:7687", "neo4j", "neo4j_team")
 

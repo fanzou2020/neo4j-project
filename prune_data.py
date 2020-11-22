@@ -53,35 +53,35 @@ def process_review(newFile, line):
     newFile.write("\n")
     return
 
-# # process business data
-# filename_business = "../original_data/yelp_academic_dataset_business.json"
-# newFile = open("business.json", "a")
-#
-# with open(filename_business, 'r') as f:
-#     line = f.readline()
-#     while line:
-#         process_business(newFile, line)
-#         line = f.readline()
+# process business data
+filename_business = "../original_data/yelp_academic_dataset_business.json"
+newFile = open("data/business.json", "a")
+
+with open(filename_business, 'r') as f:
+    line = f.readline()
+    while line:
+        process_business(newFile, line)
+        line = f.readline()
 
 
-# # process user data
-# filename_user = "../original_data/yelp_academic_dataset_user.json"
-# newUserFile = open("user.json", "a")
-#
-# with open(filename_user, 'r') as f:
-#     line = f.readline()
-#     while line:
-#         process_user(newUserFile, line)
-#         line = f.readline()
+# process user data
+filename_user = "../original_data/yelp_academic_dataset_user.json"
+newUserFile = open("data/user.json", "a")
+
+with open(filename_user, 'r') as f:
+    line = f.readline()
+    while line:
+        process_user(newUserFile, line)
+        line = f.readline()
 
 
-# # process review data
-# filename_review = "../../../../../Downloads/archive/yelp_academic_dataset_review.json"
-# newReviewFile = open("review.json", "a")
-#
-# with open(filename_review, 'r') as f:
-#     line = f.readline()
-#     while line:
-#         process_review(newReviewFile, line)
-#         line = f.readline()
+# process review data
+filename_review = "../../../../../Downloads/archive/yelp_academic_dataset_review.json"
+newReviewFile = open("data/review.json", "a")
+
+with open(filename_review, 'r') as f:
+    line = f.readline()
+    while line:
+        process_review(newReviewFile, line)
+        line = f.readline()
 
