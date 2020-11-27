@@ -2,6 +2,15 @@ import json
 
 from neo4j import GraphDatabase
 
+"""
+create FRIEND relationship, given one user and a set of his/her friends
+
+MATCH (u1:User) WHERE u1.user_id = "eIeftwebaehpl"
+for each friend
+    MATCH (u2:User) WHERE u2.user_id = "webae"
+    MERGE (u1) -[:FRIEND]- (u2)
+    
+"""
 
 class Neo4jDriver:
 
@@ -17,15 +26,9 @@ class Neo4jDriver:
 
     @staticmethod
     def _create_knows_relation(tx, my_id, friend_id):
-        tx.run("MATCH(a:User), (b:User)"
-               "WHERE a.user_id=$my_id AND b.user_id=$friend_id"
-               "CREATE (a) -[:Knows]-> (b)",
-               my_id=my_id,
-               friend_id=friend_id
-               )
+        tx.run()
 
 
-# TODO: avoid duplicate knows relationship
 if __name__ == "__main__":
     driver = Neo4jDriver("neo4j://localhost:7687", "neo4j", "neo4j_team")
 
