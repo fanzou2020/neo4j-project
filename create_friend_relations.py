@@ -12,6 +12,7 @@ for each friend
     
 """
 
+
 class Neo4jDriver:
 
     def __init__(self, uri, user, password):
@@ -24,8 +25,9 @@ class Neo4jDriver:
         with self.driver.session() as session:
             session.write_transaction(self._create_knows_relation, my_id, friend_id)
 
+    # TODO: create friend relationships
     @staticmethod
-    def _create_knows_relation(tx, my_id, friend_id):
+    def _create_knows_relation(tx, my_id, friends):
         tx.run()
 
 
@@ -39,8 +41,7 @@ if __name__ == "__main__":
             item = json.loads(line)
             myId = item["user_id"]
             myFriends = [x.strip() for x in item["friends"].split(',')]
-            for myFriend in myFriends:
-                driver.create_knows(myId, myFriend)
+            driver.create_knows(myId, myFriends)
             line = f.readline()
 
     driver.close()

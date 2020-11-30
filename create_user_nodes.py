@@ -36,9 +36,18 @@ if __name__ == "__main__":
     # create Business node
     with open("data/user.json", "r") as f:
         line = f.readline()
+        lineNum = 1
         while line:
-            item = json.loads(line)
-            driver.create_user(item)
-            line = f.readline()
+            if lineNum % 1000 == 0:
+                print(lineNum)
+            if lineNum <= 1944087:
+                line = f.readline()
+                lineNum += 1
+                continue
+            else:
+                item = json.loads(line)
+                driver.create_user(item)
+                line = f.readline()
+                lineNum += 1
 
     driver.close()
