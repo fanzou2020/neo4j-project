@@ -16,4 +16,7 @@ and then restart server.
 ## Data Source
 1. Uncomment lines in `prune_data.py`, and change the filepath of original data to your own filepath in the code.        
 This python file will produce pruned data for our project.
-2. 
+2. Run `create_business_nodes.py`        
+3. Run `create_user_nodes.py`    
+4. Run `create_category.py`    
+5. continued...
