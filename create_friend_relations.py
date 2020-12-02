@@ -21,14 +21,20 @@ class Neo4jDriver:
     def close(self):
         self.driver.close()
 
-    def create_knows(self, my_id, friend_id):
+    def create_friends(self, myId, myFriends):
         with self.driver.session() as session:
-            session.write_transaction(self._create_knows_relation, my_id, friend_id)
+            session.write_transaction(self._create_friends_relation, myId, myFriends)
 
-    # TODO: create friend relationships
     @staticmethod
-    def _create_knows_relation(tx, my_id, friends):
-        tx.run()
+    def _create_friends_relation(tx, myId, myFriends):
+        tx.run(
+            "MATCH (u1:User) WHERE u1.user_id = $myId\n"
+            "UNWIND $myFriends as friend\n"
+            "MATCH (u2:User) WHERE u2.user_id = friend\n"
+            "MERGE (u1) -[:FRIEND]- (u2)",
+            myId=myId,
+            myFriends=myFriends
+        )
 
 
 if __name__ == "__main__":
@@ -37,11 +43,25 @@ if __name__ == "__main__":
     # create Business node
     with open("data/user.json", "r") as f:
         line = f.readline()
-        while line:
-            item = json.loads(line)
-            myId = item["user_id"]
-            myFriends = [x.strip() for x in item["friends"].split(',')]
-            driver.create_knows(myId, myFriends)
-            line = f.readline()
+        lineNum = 1
+        try:
+            while line:
+                if lineNum % 1000 == 0:
+                    print(lineNum)
+                if lineNum < 150:
+                    line = f.readline()
+                    lineNum += 1
+                    continue
+                else:
+                    item = json.loads(line)
+                    myId = item["user_id"]
+                    friends = item["friends"]
+                    if friends != "None":
+                        myFriends = [x.strip() for x in item["friends"].split(',')]
+                        driver.create_friends(myId, myFriends)
+                        line = f.readline()
+                        lineNum += 1
+        finally:
+            print(lineNum)
 
     driver.close()
