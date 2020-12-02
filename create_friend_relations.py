@@ -48,7 +48,7 @@ if __name__ == "__main__":
             while line:
                 if lineNum % 1000 == 0:
                     print(lineNum)
-                if lineNum < 150:
+                if lineNum < 136345:
                     line = f.readline()
                     lineNum += 1
                     continue
@@ -59,8 +59,8 @@ if __name__ == "__main__":
                     if friends != "None":
                         myFriends = [x.strip() for x in item["friends"].split(',')]
                         driver.create_friends(myId, myFriends)
-                        line = f.readline()
-                        lineNum += 1
+                    line = f.readline()
+                    lineNum += 1
         finally:
             print(lineNum)
 
