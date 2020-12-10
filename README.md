@@ -17,7 +17,9 @@ and then restart server.
 1. Uncomment lines in `prune_data.py`, and change the filepath of original data to your own filepath in the code.        
 This python file will produce pruned data for our project.
 2. Run `python create_business_nodes.py` in terminal   
-3. Run `python create_user_nodes.py` in terminal   
-4. Run `python create_category.py` in terminal    
-5. Run `CREATE INDEX FOR (u:User) ON (u.user_id)` in browser console.
-6. Run `python create_friend_relations.py` in terminal    
+3. Run `CREATE INDEX FOR (b:Business) ON (b.business_id)` in browser console. 
+4. Run `python create_user_nodes.py` in terminal   
+5. Run `python create_category.py` in terminal    
+6. Run `CREATE INDEX FOR (u:User) ON (u.user_id)` in browser console.
+7. Run `python create_friend_relations.py` in terminal    
+8. Run `python create_review_relations.py` in terminal

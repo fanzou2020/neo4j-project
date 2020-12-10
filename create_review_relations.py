@@ -2,6 +2,15 @@ import json
 
 from neo4j import GraphDatabase
 
+"""
+create REVIEW relationship, given a reviewline
+
+MATCH (u:User) WHERE u.user_id = "eIeftwebaehpl"
+MATCH (b:Business) WHERE b.business_id = "abcdfrEfdf"
+MERGE (u) -[:REVIEW { review_id: $review_id, stars: $stars, date: $date }]-> (b) 
+
+"""
+
 
 class Neo4jDriver:
 
@@ -17,25 +26,38 @@ class Neo4jDriver:
 
     @staticmethod
     def _create_review_relation(tx, review):
-        tx.run("MATCH (a:User), (b:Business)"
-               "WHERE a.user_id = $user_id AND b.business_id = $business_id"
-               "CREATE (a) -[:Has_Reviewed {stars: $stars, date: $date }]-> (b)",
+        tx.run("MATCH (u:User) WHERE u.user_id = $user_id\n"
+               "MATCH (b:Business) WHERE b.business_id = $business_id\n"
+               "MERGE (u) -[:REVIEW { review_id: $review_id, stars: $stars, date: $date }]-> (b)",
+               review_id=review["review_id"],
                user_id=review["user_id"],
-               business_id=review["name"],
-               stars=review["review_count"],
-               date=review["average_stars"]
+               business_id=review["business_id"],
+               stars=review["stars"],
+               date=review["date"]
                )
 
 
 if __name__ == "__main__":
     driver = Neo4jDriver("neo4j://localhost:7687", "neo4j", "neo4j_team")
 
-    # create Business node
-    with open("data/review.json", "r") as f:
+    with open("data/review_test.json", "r") as f:
         line = f.readline()
-        while line:
-            item = json.loads(line)
-            driver.create_review(item)
-            line = f.readline()
+        lineNum = 1
+        try:
+            while line:
+                if lineNum % 10000 == 0:
+                    print(lineNum)
+                # if lineNum < 1111:
+                #     line = f.readline()
+                #     lineNum += 1
+                #     continue
+                else:
+                    item = json.loads(line)
+                    driver.create_review(item)
+                    line = f.readline()
+                    lineNum += 1
+
+        finally:
+            print(lineNum)
 
     driver.close()
