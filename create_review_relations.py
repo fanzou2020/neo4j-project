@@ -40,17 +40,17 @@ class Neo4jDriver:
 if __name__ == "__main__":
     driver = Neo4jDriver("neo4j://localhost:7687", "neo4j", "neo4j_team")
 
-    with open("data/review_test.json", "r") as f:
+    with open("data/review.json", "r") as f:
         line = f.readline()
         lineNum = 1
         try:
             while line:
                 if lineNum % 10000 == 0:
                     print(lineNum)
-                # if lineNum < 1111:
-                #     line = f.readline()
-                #     lineNum += 1
-                #     continue
+                if lineNum < 5255500:
+                    line = f.readline()
+                    lineNum += 1
+                    continue
                 else:
                     item = json.loads(line)
                     driver.create_review(item)
