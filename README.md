@@ -23,3 +23,12 @@ This python file will produce pruned data for our project.
 6. Run `CREATE INDEX FOR (u:User) ON (u.user_id)` in browser console.
 7. Run `python create_friend_relations.py` in terminal    
 8. Run `python create_review_relations.py` in terminal
+9. Add "review_count" property to Business nodes.   
+   Run the following query in browser console
+   ```
+   MATCH (b:Business { business_id: nIEhsGbw0vJuYl05bzzj6Q }) 
+	 CALL {
+		WITH b MATCH (b) <-[r:REVIEW]- (:User) RETURN COUNT(r) as review_count
+	 }
+   SET b.review_count = review_count
+   ```
