@@ -32,3 +32,5 @@ This python file will produce pruned data for our project.
 	 }
    SET b.review_count = review_count
    ```
+10. Create index for category.  
+    Run `CREATE INDEX FOR (c:Category) ON (c.category_name)` in browser console.
